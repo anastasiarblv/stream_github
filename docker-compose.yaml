@@ -33,7 +33,7 @@ services:
 
   kafka-producer:
     build:
-      context: ./kafka-producer
+      context: ./docker/kafka-producer
     container_name: kafka-producer
     depends_on:
       - kafka
@@ -48,7 +48,7 @@ services:
 
   kafka-consumer:
     build:
-      context: ./kafka-consumer
+      context: ./docker/kafka-consumer
     container_name: kafka-consumer
     depends_on:
       - kafka
@@ -62,7 +62,7 @@ services:
 
   ui:
     build:
-      context: ./ui
+      context: ./docker/ui
     container_name: ui
     restart: always
     ports:
@@ -78,7 +78,7 @@ services:
 
   postgres:
     build:
-      context: ./postgres
+      context: ./docker/postgres
     container_name: postgres
     restart: always
     environment:
@@ -99,7 +99,7 @@ services:
     image: dpage/pgadmin4:latest
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: nataz@admin.com
+      PGADMIN_DEFAULT_EMAIL: nataer@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5000:80"
