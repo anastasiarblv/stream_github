@@ -61,22 +61,6 @@ services:
     networks:
     - bridge
 
-  ui:
-    build:
-      context: ./docker/ui
-    container_name: ui
-    restart: always
-    ports:
-    - "8501:8501"
-    environment:
-        - DB_NAME=postgres
-        - DB_USER=postgres
-        - DB_PASSWORD=postgres
-    depends_on:
-    - postgres
-    networks:
-      - bridge
-
   postgres:
     build:
       context: ./docker/postgres
@@ -100,7 +84,7 @@ services:
     image: dpage/pgadmin4:latest
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: nataer@admin.com
+      PGADMIN_DEFAULT_EMAIL: nataty@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5000:80"
@@ -108,7 +92,23 @@ services:
       - postgres
     networks:
       - bridge
-
+  ui:
+    build:
+      context: ./docker/ui
+    container_name: ui
+    restart: always
+    ports:
+    - "8501:8501"
+    environment:
+        DB_NAME: postgres
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
+    depends_on:
+    - postgres
+    networks:
+      - bridge
+      
 volumes:
   settings:
   data:

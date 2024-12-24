@@ -1,24 +1,20 @@
+# https://konstantinklepikov.github.io/myknowlegebase/notes/sqlalchemy-docs.html
+# https://pythonru.com/biblioteki/crud-sqlalchemy-core
+from os import environ ## для чтения переменных среды, для подключения к базе данных
 import streamlit as st
 import time
 import psycopg2
 from psycopg2 import OperationalError
-import logging
-
-logging.basicConfig(level=logging.INFO)
-
-POSTGRES_DB='postgres'
-POSTGRES_USER= 'postgres'
-POSTGRES_PASSWORD='postgres'
-container_name_postgres ='postgres'
-PORT = '5432'
+from sqlalchemy import create_engine, text
 
 def fetch_data():
     try:
-        conn = psycopg2.connect(dbname=POSTGRES_DB, user=POSTGRES_USER, password=POSTGRES_PASSWORD, host=container_name_postgres, port = PORT)
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM sentences")
-        rows = cur.fetchall()
-        cur.close()
+        DATABASE_URL = environ.get('DATABASE_URL')
+        engine = create_engine(DATABASE_URL)
+        conn = engine.connect() 
+        select_query_string = f"SELECT * FROM sentences"
+        result = conn.execute(text(select_query_string))
+        rows = result.fetchall()
         conn.close()
         return rows
     except OperationalError as e:

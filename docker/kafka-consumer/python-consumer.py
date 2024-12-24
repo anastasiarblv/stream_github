@@ -1,3 +1,6 @@
+# https://konstantinklepikov.github.io/myknowlegebase/notes/sqlalchemy-docs.html
+# https://planetscale.com/blog/using-mysql-with-sql-alchemy-hands-on-examples
+# https://pythonru.com/biblioteki/crud-sqlalchemy-core
 from os import environ ## для чтения переменных среды, для подключения к базе данных
 from kafka import KafkaConsumer
 import json
