@@ -1,0 +1,1 @@
+(strem_vir_sred) (base) C:\Users\honor\Desktop\stream>docker compose up -d --build
