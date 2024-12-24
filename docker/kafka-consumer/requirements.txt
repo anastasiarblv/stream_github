@@ -3,5 +3,7 @@ schedule==1.1.0
 aiokafka==0.7.2
 Faker==15.1.3
 psycopg2-binary
-#sqlalchemy
+SQLAlchemy
 nltk
+python-dotenv
+
